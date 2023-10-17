@@ -1,3 +1,6 @@
+#Tutorial credit to JimShapedCoding on Youtube https://www.youtube.com/watch?v=XVv6mJpFOb0&ab_channel=freeCodeCamp.org
+
+
 #imports-------------------------------------------------------------------------------------------
 from bs4 import BeautifulSoup
 import requests 
