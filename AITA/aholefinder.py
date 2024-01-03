@@ -53,6 +53,8 @@ def analyze_post(post_link):
         try:
             f.write("\n{\n\t\"title\" : \"" + title + "\",")
             f.write("\n\t\"body\" : \"" + body + "\",")
+            if ('\U0001f4a9' in decision): #This handles decisions of 'Poo Mode' which include an unreadable character (poo emoji)
+                decision = 'POO Mode'
             f.write("\n\t\"decision\" : \"" + decision + "\",")
             f.write("\n\t\"valid\" : \"true\" \n},")
         except: #This takes care of crash-causing edge cases, mostly unencodable chars atm
