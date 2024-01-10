@@ -13,10 +13,6 @@ from datetime import datetime #To get date for file naming
 import traceback #To debug better
 import time
 
-filename = datetime.today().strftime('%Y-%m-%d') + '.json'
-with open('./data/' + filename, 'w') as f:
-    f.write("[")
-
 #Ensures text pulled from posts is compatible with JSON
 def clean_text(text):
     """Adds escape characters to double quotes.
@@ -64,6 +60,10 @@ def analyze_post(post_link):
             print("")
 
 #Main----------------------------------------------------------------------------------------------
+filename = datetime.today().strftime('%Y-%m-%d') + '.json'
+#with open('./data/' + filename, 'w') as f:
+#    f.write("[")
+
 home = requests.get('https://www.reddit.com/svc/shreddit/community-more-posts/top/?t=WEEK&after=dDNfMTgyaGVnYg%3D%3D&name=AmItheAsshole&adDistance=3&feedLength=25')
 homesoup = BeautifulSoup(home.text, 'lxml')
 posts = homesoup.find_all('a', slot='full-post-link')
@@ -71,10 +71,17 @@ posts = homesoup.find_all('a', slot='full-post-link')
 print (len(posts))
 print (posts[0]['href'])\
 
-for post in posts:
-    analyze_post('https://www.reddit.com' + post['href'])
+home = requests.get('https://www.reddit.com/svc/shreddit/community-more-posts/top/?t=WEEK&after=dDNfMTgyaGVnYg%3D%3D&name=AmItheAsshole&adDistance=3&feedLength=50')
+homesoup = BeautifulSoup(home.text, 'lxml')
+posts = homesoup.find_all('a', slot='full-post-link')
 
-with open('./data/' + filename, 'a') as f:
-    f.write("\n]\n")
+print (len(posts))
+print (posts[0]['href'])\
 
-f.close()
+#for post in posts:
+#    analyze_post('https://www.reddit.com' + post['href'])
+#
+#with open('./data/' + filename, 'a') as f:
+#    f.write("\n]\n")
+
+#f.close()
